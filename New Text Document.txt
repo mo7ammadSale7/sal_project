@@ -1,0 +1,36 @@
+export DJANGO_SETTINGS_MODULE='my_blog.prod_settings'
+export SECRET_KEY='&g(sac%ls#ru9l&eu-b_%+(ptn87qpu=7ucll5knpythonns'
+export DEBUG='true'
+export DATABASE_URL='mysql://salima92:kazar1992@salima92.mysql.pythonanywhere-services.com/salima92$project'
+
+
+/home/salima92/.virtualenvs/venv/bin/python
+
+
+echo "export DJANGO_SETTINGS_MODULE='my_blog.prod_settings'" >> .env
+echo "export SECRET_KEY='&g(sac%ls#ru9l&eu-b_%+(ptn87qpu=7ucll5knpythonns'" >> .env
+echo "export DEBUG='true'" >> .env
+
+
+echo "export DATABASE_URL='postgres://USER:PASSWORD@LINK:PORT/DBNAME'" >> .env
+
+set -a; source /home/salima92/sal_project/.env; set +a
+
+echo 'set -a; source /home/salima92/sal_project/.env; set +a' >> ~/.virtualenvs/venv/bin/postactivate
+
+
+
+import os
+import sys
+
+from dotenv import load_dotenv
+
+path = '/home/salima92/sal_project'
+if path not in sys.path:
+    sys.path.append(path)
+
+load_dotenv(os.path.join(path, '.env'))
+
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
